@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<title>Math Roblox Game</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#4facfe,#00f2fe);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.game{
+background:white;
+width:420px;
+padding:30px;
+border-radius:15px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+h1{
+margin-top:0;
+color:#333;
+}
+
+.level{
+font-size:20px;
+margin-bottom:10px;
+font-weight:bold;
+color:#444;
+}
+
+.question{
+font-size:30px;
+margin:20px 0;
+font-weight:bold;
+}
+
+input{
+padding:10px;
+font-size:20px;
+width:120px;
+text-align:center;
+border-radius:8px;
+border:2px solid #ddd;
+}
+
+button{
+margin-top:15px;
+padding:12px 25px;
+font-size:18px;
+border:none;
+border-radius:8px;
+background:#ff4757;
+color:white;
+cursor:pointer;
+transition:0.2s;
+}
+
+button:hover{
+background:#e84118;
+transform:scale(1.05);
+}
+
+.result{
+margin-top:15px;
+font-weight:bold;
+font-size:18px;
+}
+
+.score{
+margin-top:10px;
+font-size:16px;
+color:#555;
+}
+
+.finish{
+font-size:22px;
+color:#2ecc71;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+<h1>Math Game</h1>
+
+<div class="level" id="level">Level 1 (+)</div>
+
+<div class="question" id="question"></div>
+
+<input type="number" id="answer">
+
+<br>
+
+<button onclick="checkAnswer()">Submit</button>
+
+<div class="result" id="result"></div>
+
+<div class="score" id="score">Score: 0</div>
+
+</div>
+
+<script>
+
+let level=1
+let questionIndex=0
+let score=0
+
+let a,b,correct
+
+const totalQuestions=3
+
+function generateQuestion(){
+
+if(level===1){
+a=Math.floor(Math.random()*10)+1
+b=Math.floor(Math.random()*10)+1
+correct=a+b
+document.getElementById("question").innerText=a+" + "+b
+}
+
+if(level===2){
+a=Math.floor(Math.random()*10)+5
+b=Math.floor(Math.random()*5)+1
+correct=a-b
+document.getElementById("question").innerText=a+" - "+b
+}
+
+if(level===3){
+a=Math.floor(Math.random()*5)+1
+b=Math.floor(Math.random()*5)+1
+correct=a*b
+document.getElementById("question").innerText=a+" × "+b
+}
+
+}
+
+function checkAnswer(){
+
+let userAnswer=parseInt(document.getElementById("answer").value)
+
+if(userAnswer===correct){
+score++
+document.getElementById("result").innerText="Correct!"
+}else{
+document.getElementById("result").innerText="Wrong! Answer: "+correct
+}
+
+document.getElementById("score").innerText="Score: "+score
+
+questionIndex++
+document.getElementById("answer").value=""
+
+if(questionIndex<totalQuestions){
+generateQuestion()
+}else{
+
+level++
+questionIndex=0
+
+if(level>3){
+document.querySelector(".game").innerHTML="<div class='finish'>Game Finished!<br>Score: "+score+"/9</div>"
+return
+}
+
+updateLevel()
+generateQuestion()
+
+}
+
+}
+
+function updateLevel(){
+
+if(level===1){
+document.getElementById("level").innerText="Level 1 (+)"
+}
+
+if(level===2){
+document.getElementById("level").innerText="Level 2 (-)"
+}
+
+if(level===3){
+document.getElementById("level").innerText="Level 3 (×)"
+}
+
+}
+
+generateQuestion()
+
+</script>
+
+</body>
+</html>

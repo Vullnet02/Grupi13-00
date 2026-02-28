@@ -1,0 +1,26 @@
+.div1{
+    margin: 20px 360px;
+    
+}
+
+
+.div1 img{
+    width: 1000px;
+    height: 570px;
+    border-radius: 20px;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+    font-family: monospace;
+}
